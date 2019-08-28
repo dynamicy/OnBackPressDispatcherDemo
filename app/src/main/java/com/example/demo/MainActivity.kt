@@ -3,6 +3,7 @@ package com.example.demo
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.demo.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
