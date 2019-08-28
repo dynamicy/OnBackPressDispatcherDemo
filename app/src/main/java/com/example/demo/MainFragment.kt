@@ -8,26 +8,63 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         // Add Callback
-        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
 
-            override fun handleOnBackPressed() {
-                if (!isEnableHandled()) {
-                    Toast.makeText(this@MainFragment.context, "[handleOnBackPressed]: false", Toast.LENGTH_SHORT).show()
-                    handleEnable()
-                } else {
-                    isEnabled = false
+                override fun handleOnBackPressed() {
+                    if (!viewModel.isEanble1) {
+                        Toast.makeText(
+                            this@MainFragment.context,
+                            "[handleOnBackPressed]: false",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        isEnabled = false
+                    }
                 }
-            }
-        })
+            })
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+
+                override fun handleOnBackPressed() {
+                    if (!viewModel.isEanble2) {
+                        Toast.makeText(
+                            this@MainFragment.context,
+                            "[handleOnBackPressed]: false",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        isEnabled = false
+                    }
+                }
+            })
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+
+                override fun handleOnBackPressed() {
+                    if (!viewModel.isEanble3) {
+                        Toast.makeText(
+                            this@MainFragment.context,
+                            "[handleOnBackPressed]: false",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        isEnabled = false
+                    }
+                }
+            })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,12 +81,26 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    fun isEnableHandled(): Boolean {
-        return viewModel.isEanble
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    fun handleEnable() {
-        viewModel.isEanble = true
+        button1.setOnCheckedChangeListener { _, isChecked ->
+            Toast.makeText(this@MainFragment.context, "[Button1]: $isChecked", Toast.LENGTH_SHORT)
+                .show()
+            viewModel.isEanble1 = isChecked
+        }
+
+        button2.setOnCheckedChangeListener { _, isChecked ->
+            Toast.makeText(this@MainFragment.context, "[Button2]: $isChecked", Toast.LENGTH_SHORT)
+                .show()
+            viewModel.isEanble2 = isChecked
+        }
+
+        button3.setOnCheckedChangeListener { _, isChecked ->
+            Toast.makeText(this@MainFragment.context, "[Button3]: $isChecked", Toast.LENGTH_SHORT)
+                .show()
+            viewModel.isEanble3 = isChecked
+        }
     }
 
     companion object {

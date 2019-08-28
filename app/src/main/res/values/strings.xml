@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">OnBackPressDispatcherDemo</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button1">Button1</string>
+    <string name="button2">Button2</string>
+    <string name="button3">Button3</string>
 </resources>
